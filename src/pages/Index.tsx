@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import Icon from "@/components/ui/icon";
 
+const ORDER_EMAIL_URL = "https://functions.poehali.dev/05c0eac9-50a1-4d18-a128-0977640c7955";
+
 const IMG_ORNAMENT = "https://cdn.poehali.dev/projects/2f0fbbd7-69be-4e23-80fe-f0a7c71a7755/files/ed3c8296-6c28-4309-b169-92cabe70b232.jpg";
 const IMG_WORKSHOP = "https://cdn.poehali.dev/projects/2f0fbbd7-69be-4e23-80fe-f0a7c71a7755/files/4b11eda5-05ed-44f8-bbef-44e6a17183e6.jpg";
 const IMG_COLLECTION = "https://cdn.poehali.dev/projects/2f0fbbd7-69be-4e23-80fe-f0a7c71a7755/files/24ba75be-baea-43c2-b8a0-f498f1de7fee.jpg";
@@ -63,10 +65,37 @@ export default function Index() {
   const [cartOpen, setCartOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [orderSent, setOrderSent] = useState(false);
+  const [orderLoading, setOrderLoading] = useState(false);
+  const [orderError, setOrderError] = useState("");
   const [activeTab, setActiveTab] = useState(0);
   const [orderForm, setOrderForm] = useState({
     name: "", phone: "", email: "", type: "Стандарт", size: "Маленький (6 см)", color: "", notes: ""
   });
+
+  const submitOrder = async () => {
+    if (!orderForm.name || !orderForm.phone) {
+      setOrderError("Пожалуйста, укажите имя и телефон");
+      return;
+    }
+    setOrderLoading(true);
+    setOrderError("");
+    try {
+      const res = await fetch(ORDER_EMAIL_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(orderForm),
+      });
+      if (res.ok) {
+        setOrderSent(true);
+      } else {
+        setOrderError("Ошибка при отправке. Позвоните нам напрямую.");
+      }
+    } catch {
+      setOrderError("Ошибка сети. Пожалуйста, позвоните нам напрямую.");
+    } finally {
+      setOrderLoading(false);
+    }
+  };
 
   const sections = [
     { id: "home", label: "Главная" },
@@ -392,7 +421,7 @@ export default function Index() {
               <p style={{ fontFamily: "'Merriweather', serif", fontSize: "0.9rem", color: "var(--text-mid)", lineHeight: 1.9 }}>
                 Мы свяжемся с вами в течение 24 часов для обсуждения деталей. Спасибо, что выбрали «Рождественское Яблоко»!
               </p>
-              <button className="btn-vintage mt-8" onClick={() => setOrderSent(false)}>Отправить ещё заявку</button>
+              <button className="btn-vintage mt-8" onClick={() => { setOrderSent(false); setOrderForm({ name: "", phone: "", email: "", type: "Стандарт", size: "Маленький (6 см)", color: "", notes: "" }); }}>Отправить ещё заявку</button>
             </div>
           ) : (
             <div className="retro-card p-8" style={{ background: "var(--cream)" }}>
@@ -445,9 +474,16 @@ export default function Index() {
                   />
                 </div>
               </div>
-              <button className="btn-vintage w-full mt-6 text-center"
-                onClick={() => { if (orderForm.name && orderForm.phone) setOrderSent(true); }}>
-                Отправить заявку
+              {orderError && (
+                <p style={{ fontSize: "0.85rem", color: "var(--crimson)", textAlign: "center", marginTop: "1rem", fontFamily: "'Merriweather', serif" }}>
+                  ⚠ {orderError}
+                </p>
+              )}
+              <button className="btn-vintage w-full mt-4 text-center"
+                onClick={submitOrder}
+                disabled={orderLoading}
+                style={{ opacity: orderLoading ? 0.7 : 1, cursor: orderLoading ? "wait" : "pointer" }}>
+                {orderLoading ? "Отправляем..." : "Отправить заявку"}
               </button>
               <p style={{ fontSize: "0.72rem", color: "var(--text-mid)", textAlign: "center", marginTop: "1rem" }}>
                 Нажимая кнопку, вы соглашаетесь на обработку персональных данных
