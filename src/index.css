@@ -4,98 +4,315 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
+    --background: 35 28% 95%;
+    --foreground: 20 15% 15%;
+    --card: 35 25% 92%;
+    --card-foreground: 20 15% 15%;
+    --popover: 35 25% 92%;
+    --popover-foreground: 20 15% 15%;
+    --primary: 0 65% 38%;
+    --primary-foreground: 35 28% 95%;
+    --secondary: 40 30% 85%;
+    --secondary-foreground: 20 15% 20%;
+    --muted: 35 20% 88%;
+    --muted-foreground: 20 10% 45%;
+    --accent: 43 70% 48%;
+    --accent-foreground: 20 15% 10%;
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 35 28% 95%;
+    --border: 35 20% 80%;
+    --input: 35 20% 80%;
+    --ring: 0 65% 38%;
+    --radius: 0.25rem;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --sidebar-background: 35 25% 92%;
+    --sidebar-foreground: 20 15% 15%;
+    --sidebar-primary: 0 65% 38%;
+    --sidebar-primary-foreground: 35 28% 95%;
+    --sidebar-accent: 40 30% 85%;
+    --sidebar-accent-foreground: 20 15% 20%;
+    --sidebar-border: 35 20% 80%;
+    --sidebar-ring: 0 65% 38%;
 
-    --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --cream: #f5ede0;
+    --cream-dark: #e8d9c4;
+    --crimson: #8b1a1a;
+    --crimson-light: #b02020;
+    --gold: #c9962a;
+    --gold-light: #e8b84b;
+    --forest: #2d5016;
+    --warm-brown: #5c3d1e;
+    --text-dark: #2a1a0e;
+    --text-mid: #4a3020;
   }
 
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-}
-
-@layer base {
   * {
     @apply border-border;
   }
 
   body {
     @apply bg-background text-foreground;
+    background-color: var(--cream);
+    color: var(--text-dark);
+    font-family: "Merriweather", Georgia, serif;
   }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Cormorant Garamond", Georgia, serif;
+  }
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='4' height='4' fill='none'/%3E%3Ccircle cx='1' cy='1' r='0.5' fill='%23000' opacity='0.025'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9998;
+}
+
+@keyframes snowfall {
+  0% {
+    transform: translateY(-20px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(105vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+@keyframes sway {
+  0%,
+  100% {
+    margin-left: 0;
+  }
+  25% {
+    margin-left: 20px;
+  }
+  75% {
+    margin-left: -20px;
+  }
+}
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+@keyframes ornamentSway {
+  0%,
+  100% {
+    transform: rotate(-4deg);
+  }
+  50% {
+    transform: rotate(4deg);
+  }
+}
+@keyframes sparkle {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+@keyframes pulse-gold {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(201, 150, 42, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(201, 150, 42, 0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease forwards;
+}
+.animate-fade-in {
+  animation: fadeIn 1s ease forwards;
+}
+.animate-ornament {
+  animation: ornamentSway 4s ease-in-out infinite;
+  transform-origin: top center;
+}
+.animate-sparkle {
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+.ornament-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--gold);
+}
+.ornament-divider::before,
+.ornament-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+}
+
+.retro-card {
+  background: var(--cream);
+  border: 1px solid var(--cream-dark);
+  box-shadow:
+    3px 3px 0 var(--cream-dark),
+    0 8px 30px rgba(0, 0, 0, 0.08);
+  position: relative;
+}
+.retro-card::before {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border: 1px solid rgba(201, 150, 42, 0.18);
+  pointer-events: none;
+}
+
+.gold-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--gold) 0%,
+    var(--gold-light) 30%,
+    #f0d060 50%,
+    var(--gold-light) 70%,
+    var(--gold) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s linear infinite;
+}
+
+.btn-vintage {
+  background: var(--crimson);
+  color: var(--cream);
+  border: 2px solid var(--crimson);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.75rem 2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+}
+.btn-vintage::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  pointer-events: none;
+}
+.btn-vintage:hover {
+  background: var(--crimson-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(139, 26, 26, 0.4);
+}
+
+.btn-gold {
+  background: transparent;
+  color: var(--gold);
+  border: 2px solid var(--gold);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.75rem 2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+.btn-gold:hover {
+  background: var(--gold);
+  color: var(--text-dark);
+  box-shadow: 0 6px 20px rgba(201, 150, 42, 0.4);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--cream-dark);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--crimson);
+  border-radius: 2px;
+}
+
+.section-title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 600;
+  color: var(--crimson);
+  line-height: 1.1;
+}
+
+.nav-link {
+  position: relative;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.05rem;
+  letter-spacing: 0.05em;
+  color: var(--text-dark);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--gold);
+  transition: width 0.3s;
+}
+.nav-link:hover {
+  color: var(--crimson);
+}
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.snowflake {
+  position: fixed;
+  top: -20px;
+  color: rgba(255, 255, 255, 0.85);
+  pointer-events: none;
+  z-index: 9997;
+  animation:
+    snowfall linear infinite,
+    sway ease-in-out infinite;
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
 }
